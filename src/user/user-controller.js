@@ -11,8 +11,8 @@ router.get('/account/:accountId', authorize, getById);
 router.put('/account/:accountId', authorize, updateAccount, update);
 
 module.exports = router;
-
-function registerAccount(req, next) {
+//To validate our req.body 
+function registerAccount(req, res, next) {
     const schema = Joi.object({
         first_name: Joi.string().required(),
         last_name: Joi.string().required(),

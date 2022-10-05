@@ -11,6 +11,7 @@ module.exports = {
 async function authenticate({ username, password, id}) {
 
     const user = await db.User.scope('withPassword').findByPk(id);
+    //console.log(user)
     let usernameValidation = false;
     if(username === user.dataValues.username){
         usernameValidation = true;
@@ -18,7 +19,7 @@ async function authenticate({ username, password, id}) {
     const compare = await comparePassword(password, user.dataValues.password);
     if (user && compare && usernameValidation) {
         const { password, ...userWithoutPassword } = user;
-        return userWithoutPassword;
+        return userWithoutPassword; //returning the user object without password
     }
 }
 
@@ -39,20 +40,22 @@ async function create(params) {
     if (params.password) {
         params.password = await bcrypt.hash(params.password, 10);
     }
-
+    //creating a record in the database using the create library (sequalize)
     await db.User.create(params);
 }
 
 async function update(accountId, params) {
+    //we get this user object from the db
     const user = await getUser(accountId);
-
+    //if changing the password this is to encrypt the new password
     if (params.password) {
         params.password = await bcrypt.hash(params.password, 10);
     }
 
     Object.assign(user, params);
+    //saving the user object to the db
     await user.save();
-
+    //To omit password in the response 
     return omitPassword(user.get());
 }
 
