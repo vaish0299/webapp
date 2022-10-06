@@ -8,7 +8,7 @@ const fn = async x => {
     });
 };
 (async function () {
-    const z = await fn(3);
+    const z = await fn(6);
     describe('User Service Tests', function() {
         const data = {
             first_name: "Test",
