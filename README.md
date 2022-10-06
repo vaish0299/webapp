@@ -18,3 +18,5 @@ Call the API using postman
 The API to be called is https://localhost:8000/healthz
 Can go to terminal and type : curl -v “https://localhost:8000/healthz” as well.
 The server should return status 200
+
+
