@@ -13,13 +13,15 @@ async function authenticate({ username, password, id}) {
     const user = await db.User.scope('withPassword').findByPk(id);
     //console.log(user)
     let usernameValidation = false;
-    if(username === user.dataValues.username){
-        usernameValidation = true;
-    }
-    const compare = await comparePassword(password, user.dataValues.password);
-    if (user && compare && usernameValidation) {
-        const { password, ...userWithoutPassword } = user;
-        return userWithoutPassword; //returning the user object without password
+    if(user){
+        if(username === user.dataValues.username){
+            usernameValidation = true;
+        }
+        const compare = await comparePassword(password, user.dataValues.password);
+        if (user && compare && usernameValidation) {
+            const { password, ...userWithoutPassword } = user;
+            return userWithoutPassword; //returning the user object without password
+        }
     }
 }
 
@@ -41,13 +43,23 @@ async function create(params) {
         params.password = await bcrypt.hash(params.password, 10);
     }
     //creating a record in the database using the create library (sequalize)
-    await db.User.create(params);
+    const user = await db.User.create(params);
+    return omitPassword(user.get());
 }
 
 async function update(accountId, params) {
     //we get this user object from the db
     const user = await getUser(accountId);
     //if changing the password this is to encrypt the new password
+    if(user){
+        if(params.username !== user.dataValues.username) {
+            throw 'Forbidden to change user name';
+        }
+    }else {
+        throw 'not found';
+    }
+ 
+
     if (params.password) {
         params.password = await bcrypt.hash(params.password, 10);
     }
