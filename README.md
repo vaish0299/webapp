@@ -1,22 +1,42 @@
 # webapp
-Prerequisites for building and deploying the application:
+## Technology Stack
 
-Download and install Visual Studio
-Download postman
-Created an api using nodejs
-We need to download and install nodejs and install express, nodemon and npm using the following commands
-npm init -y
-npm i -D nodemon (nodemon as a dev dependency)
-Npm I express
-Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs a JavaScript Engine
-express is a framework to build the API in javascript
+*Backend Technology - Node JS
+*Framework : Express
+*Database : MySQL
+—————————————————————————————————-----------------------------------------------
+## Prerequisites 
 
-Build and Deploy instructions for the web application:
-Run the file using npm run dev
-Now the server will be running on port 8000
-Call the API using postman
-The API to be called is https://localhost:8000/healthz
-Can go to terminal and type : curl -v “https://localhost:8000/healthz” as well.
-The server should return status 200
+Install:
+*Visual Studio code
+*Postman
+*Mysql Workbench
+—————————————————————————————————-----------------------------------------------
+## Build Instructions
+git
+*Clone repo using the command “git clone “
+*Change to project directory in terminal and run the following commands
+*Run npm install in terminal 
+—————————————————————————————————-----------------------------------------------
+## Deploy Instructions
+
+*Run application by npm run dev
+*Default port is — and runs in the localhost
+*Test API endpoint using postman 
+—————————————————————————————————-----------------------------------------------
+## Running Tests
+*npm run test
+—————————————————————————————————-----------------------------------------------
+## Libraries Used:
+
+1. Nodemon
+2. Bcrypt 
+3. Express
+4. Joi
+5. Mysql
+6. Sequelize
+7. sqlite3
+8. chai
+9. supertest
 
 
