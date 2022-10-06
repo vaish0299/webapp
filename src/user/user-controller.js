@@ -24,7 +24,7 @@ function registerAccount(req, res, next) {
 
 function register(req, res, next) {
     userService.create(req.body)
-        .then(() => res.json({ message: ' User Registration successful!!' }))
+        .then(() => res.json({ message: 'User Registration successful!!' }))
         .catch(next);
 }
 
