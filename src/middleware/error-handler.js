@@ -6,8 +6,17 @@ function errorHandler(err, res, res, next) {
         case typeof err === 'string':
             const is404 = err.toLowerCase().endsWith('not found');
             const isUserAlreadyPresent = err.toLowerCase().includes('is already registered');
-            let statusCode = is404 ? 404 : 400;
-            statusCode = isUserAlreadyPresent ? 400 : 404;
+            const userForbidden = err.toLowerCase().includes('change user name');
+            const bad = err.toLowerCase().includes('bad');
+
+            let statusCode;
+            if(is404) {
+                statusCode = 404;
+            } else if (isUserAlreadyPresent || bad) {
+                statusCode = 400;
+            }else if(userForbidden){
+                statusCode = 403;
+            }
             return res.status(statusCode).json({ message: err });
         case err.name === 'UnauthorizedError':
             return res.status(401).json({ message: 'Unauthorized' });

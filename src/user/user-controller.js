@@ -24,7 +24,7 @@ function registerAccount(req, res, next) {
 
 function register(req, res, next) {
     userService.create(req.body)
-        .then(() => res.json({ message: 'User Registration successful!!' }))
+        .then(user => res.status(201).json(user))
         .catch(next);
 }
 
@@ -38,6 +38,7 @@ function updateAccount(req, res, next) {
     const schema = Joi.object({
         first_name: Joi.string().empty(''),
         last_name: Joi.string().empty(''),
+        username: Joi.string().empty(''),
         password: Joi.string().min(6).empty('')
     });
     validateRequest(req, next, schema);
@@ -45,6 +46,6 @@ function updateAccount(req, res, next) {
 
 function update(req, res, next) {
     userService.update(req.params.accountId, req.body)
-        .then(user => res.json(user))
+        .then(user => res.status(204).json(user))
         .catch(next);
 }
