@@ -20,7 +20,7 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
 sudo apt-get install nodejs
 
 #installing mysql server
-sudo apt install mysql-server
+sudo apt install mysql-server -y
 sudo systemctl start mysql.service
 sudo mysql
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
