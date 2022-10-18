@@ -56,16 +56,15 @@ build {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
       "CHECKPOINT_DISABLE=1"
+    ],
+    "scripts":[
+      "packer_init.sh"
     ]
   }
 
   provisioner "file" {
     source      = "./"
     destination = "/home/ubuntu/webapp"
-  }
-
-  provisioner "shell" {
-    script = "packer_init.sh"
   }
 
   post-processor "manifest" {

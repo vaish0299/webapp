@@ -7,7 +7,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 on:
   push:
-    branches: [ main, test ]
+    branches: [ ass4-01 ]
     paths:
       - ami-ubuntu.pkr.hcl
       - packer_init.sh
