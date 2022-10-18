@@ -12,6 +12,8 @@ sudo apt-get update
 echo_info PATH-SET-LINUX
 PATH=/usr/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/local/bin:/opt/aws/bin:/root/bin
 
+echo 'debconf debconf/frontend select Noninteractive' | sudo debconf-set-selections
+sudo apt-get install -y -q
 #installing node server
 sudo apt-get install curl
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
