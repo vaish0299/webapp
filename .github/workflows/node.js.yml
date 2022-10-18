@@ -28,5 +28,32 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
-    - run: npm run test
+
+    - name: Setting up Hashicorp Packer
+      uses: hashicorp-contrib/setup-packer@v1
+      with:
+        packer-version: 1.8.3
+
+    - name: Running test cases on featureBranch
+      run: npm ci
+      
+    - run: npm test
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifacts@v3
+      with:
+        name: webapp_artifact
+        path: |
+          dist
+          !dist/**/*.md
+
+    - name: Installing packer provisioners
+      run: packer init ami-ubuntu.pkr.hcl
+
+    - name: Running Packer template validation
+      run: packer validate ami-ubuntu.pkr.hcl
+
+    - name: Printing the contents of Directory
+      run: ls -la
+    
+
