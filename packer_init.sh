@@ -22,7 +22,7 @@ sudo apt-get install nodejs
 #installing mysql server
 sudo apt install mysql-server -y
 sudo systemctl status mysql
-sudo mysql -u root -p
+sudo mysql -u root
 SHOW DATABASES;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 exit
