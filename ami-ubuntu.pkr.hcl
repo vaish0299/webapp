@@ -56,8 +56,8 @@ build {
     environment_vars = [
       "DEBIAN_FRONTEND=noninteractive",
       "CHECKPOINT_DISABLE=1"
-    ],
-    "scripts":[
+    ]
+    scripts = [
       "packer_init.sh"
     ]
   }
