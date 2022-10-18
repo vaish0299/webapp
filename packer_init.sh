@@ -23,6 +23,7 @@ sudo apt-get install nodejs
 sudo apt install mysql-server -y
 sudo systemctl start mysql.service
 sudo mysql -u root -p
+SHOW DATABASES;
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 exit
 systemctl status mysql.service
