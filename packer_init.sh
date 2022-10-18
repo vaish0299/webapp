@@ -22,6 +22,7 @@ sudo apt-get install nodejs
 #installing mysql server
 sudo apt install mysql-server -y
 sudo systemctl start mysql.service
+sudo systemctl stop mysql.service
 sudo mysqld_safe --skip-grant-tables &
 mysql -u root
 SHOW DATABASES;
