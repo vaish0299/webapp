@@ -20,14 +20,9 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
 sudo apt-get install nodejs
 
 #installing mysql server
-sudo apt-get install -y mysql-community-server
-sudo systemctl enable --now mysqld
-systemctl status mysqld
-password=$(sudo grep 'temporary password' /var/log/mysqld.log | awk {'print $13'})
-mysql --connect-expired-password -u root -p$passwords -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';\"
-mysql -u root -ppassword
-SHOW DATABASES;
-exit
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password password'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password password'
+sudo apt-get -y install mysql-server
 systemctl status mysql.service
 
 sudo npm install -g pm2
