@@ -21,10 +21,12 @@ sudo apt-get install nodejs
 
 #installing mysql server
 sudo apt install mysql-server -y
-sudo systemctl status mysql
-sudo mysql
+sudo systemctl enable --now mysqld
+systemctl status mysqld
+password=$(sudo grep 'temporary password' /var/log/mysqld.log | awk {'print $13'})
+mysql --connect-expired-password -u root -p$passwords -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';\"
+mysql -u root -ppassword
 SHOW DATABASES;
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 exit
 systemctl status mysql.service
 
