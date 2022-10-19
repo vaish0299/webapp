@@ -20,8 +20,8 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
 sudo apt-get install nodejs
 
 #installing mysql server
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password password'
-sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password password'
+echo "mysql-server mysql-server/root_password password password" | debconf-set-selections
+echo "mysql-server mysql-server/root_password_again password password" | debconf-set-selections
 sudo apt-get -y install mysql-server
 systemctl status mysql.service
 
