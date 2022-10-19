@@ -20,7 +20,7 @@ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
 sudo apt-get install nodejs
 
 #installing mysql server
-sudo apt-get install -y mysql-server mysql-client
+sudo apt-get install -y mysql-community-server
 sudo systemctl enable --now mysqld
 systemctl status mysqld
 password=$(sudo grep 'temporary password' /var/log/mysqld.log | awk {'print $13'})
