@@ -1,5 +1,5 @@
 
-name: Building AMI on Merge
+name: Building AMI on Merge to Main
 
 env:
   AWS_REGION: us-east-1
@@ -8,10 +8,6 @@ env:
 on:
   push:
     branches: [ ass4-01 ]
-    paths:
-      - ami-ubuntu.pkr.hcl
-      - packer_init.sh
-
 
 jobs:
   ami_creation_job:
@@ -29,13 +25,5 @@ jobs:
     - name: Installing packer provisioners
       run: packer init ami-ubuntu.pkr.hcl
 
-
-    - name: Printing the contents of Directory
-      run: ls -la
-
-
     - name: Building Packer Template
       run: packer build ami-ubuntu.pkr.hcl
-
-    - name: Printing the contents of Directory after building
-      run: ls -la

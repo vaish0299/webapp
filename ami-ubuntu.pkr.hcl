@@ -67,14 +67,13 @@ build {
     destination = "/home/ubuntu/webapp"
   }
 
-  post-processor "manifest" {
-    output     = "manifest.json"
-    strip_path = true
-  }
-
-  post-processor "shell-local" {
-    inline = [
-      "echo Done Building Image"
+  provisioner "shell" {
+    environment_vars = [
+      "DEBIAN_FRONTEND=noninteractive",
+      "CHECKPOINT_DISABLE=1"
+    ]
+    scripts = [
+      "script.sh"
     ]
   }
 }
