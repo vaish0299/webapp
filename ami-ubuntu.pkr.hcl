@@ -51,11 +51,7 @@ source "amazon-ebs" "myWebApp" {
 }
 
 build {
-<<<<<<< HEAD
-  sourceser = ["source.amazon-ebs.myWebApp"]
-=======
   sources = ["source.amazon-ebs.myWebApp"]
->>>>>>> main
 
   provisioner "shell" {
     environment_vars = [
