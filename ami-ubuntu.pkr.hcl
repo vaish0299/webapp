@@ -26,6 +26,7 @@ source "amazon-ebs" "myWebApp" {
   ami_name        = "csye6225_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_description = "AMI for CSYE 6225"
   region     = "${var.aws_region}"
+  ami_users              = ["307362082106","540422937507"]
   force_deregister       = true
   force_delete_snapshot  = true
   ami_regions = [
