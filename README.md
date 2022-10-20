@@ -13,7 +13,7 @@ Install:
 * Mysql Workbench
 
 ## Build Instructions
-git
+
 * Clone repo using the command “git clone “
 * Change to project directory in terminal and run the following commands
 * Run npm install in terminal 
@@ -38,5 +38,5 @@ git
 * 7. sqlite3
 * 8. chai
 * 9. supertest
-
+*
 
