@@ -1,4 +1,4 @@
-const config = require('../../db-config.json');
+const config = require('../../db-config');
 const mysql = require('mysql2/promise');
 const { Sequelize } = require('sequelize');
 
@@ -7,7 +7,7 @@ module.exports = db = {};
 initialize();
 
 async function initialize() {
-    const { host, port, user, password, database } = config.database;
+    const { host, user, password, database, port } = config.db;
     const connection = await mysql.createConnection({ host, port, user, password });
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);
 
