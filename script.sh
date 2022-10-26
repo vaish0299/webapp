@@ -15,6 +15,8 @@ sudo npm install
 # sudo pm2 save
 sudo ln -s /home/ubuntu/webapp/node-service.service /etc/systemd/system/node-service.service
 sudo systemctl daemon-reload
+echo "daemon-reload done"
 sudo systemctl enable node-service.service
 # sudo systemctl start node-service.service
-pm2 list
+# pm2 list
+echo "complete"
