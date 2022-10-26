@@ -9,12 +9,12 @@ ls -la
 # sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u ubuntu --hp /home/ubuntu
 # pm2 save
 sudo npm install
-sudo pm2 start server.js
-pm2 list
-sudo pm2 startup systemd
-sudo pm2 save
+# sudo pm2 start server.js
+# pm2 list
+# sudo pm2 startup systemd
+# sudo pm2 save
 sudo ln -s /home/ubuntu/webapp/node-service.service /etc/systemd/system/node-service.service
 sudo systemctl daemon-reload
 sudo systemctl enable node-service.service
-sudo systemctl start node-service.service
+# sudo systemctl start node-service.service
 pm2 list
