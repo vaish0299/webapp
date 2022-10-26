@@ -1,9 +1,9 @@
 const env = process.env;
 const config = {
-  db: {
+  database: {
     host: env.DB_HOST || 'localhost',
     user: env.DB_USER || 'root',
-    password: env.DB_PASSWORD || 'root',
+    password: env.DB_PASSWORD || 'password',
     database: env.DB_NAME || 'Account',
     port: 3306
   }
