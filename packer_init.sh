@@ -16,6 +16,7 @@ PATH=/usr/bin:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/local/bin:/opt/aws/bin:/
 sudo apt-get install curl
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
 sudo apt-get install nodejs
+sudo apt install mysql-client-core-8.0
 
 # #installing mysql server
 # sudo apt install mysql-server -y
