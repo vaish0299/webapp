@@ -38,6 +38,3 @@ Install:
 * 7. sqlite3
 * 8. chai
 * 9. supertest
-
-
-sh csye6225-createStack-script.sh testStack2 testVPC2 us-east-1 10.0.0.0/16 10.0.2.0/24 10.0.3.0/24 10.0.4.0/24 dev ami-02ff7d1f36969b9f8 aws-dev 10.0.5.0/24 10.0.6.0/24 10.0.7.0/24 dev root password
