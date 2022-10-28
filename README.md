@@ -1,6 +1,6 @@
 # webapp
 ## Technology Stack
-*test
+
 * Backend Technology - Node JS
 * Framework : Express
 * Database : MySQL
@@ -38,5 +38,5 @@ Install:
 * 7. sqlite3
 * 8. chai
 * 9. supertest
-*
+
 

@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ass-5
     - name: Setting up Hashicorp Packer
       uses: hashicorp-contrib/setup-packer@v1
       with:

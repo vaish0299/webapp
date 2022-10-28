@@ -8,10 +8,8 @@ module.exports = {
     update,
 };
 
-async function authenticate({ username, password, id}) {
-
-    const user = await db.User.scope('withPassword').findByPk(id);
-    //console.log(user)
+async function authenticate({ username, password}) {
+    const user = await db.User.scope('withPassword').findOne({ where: { username: username } })
     let usernameValidation = false;
     if(user){
         if(username === user.dataValues.username){
@@ -30,8 +28,8 @@ async function comparePassword(password, hash) {
     return result;
 }
 
-async function getById(accountId) {
-    return await getUser(accountId);
+async function getById(accountId, req) {
+    return await getUser(accountId, req);
 }
 
 async function create(params) {
@@ -71,9 +69,14 @@ async function update(accountId, params) {
     return omitPassword(user.get());
 }
 
-async function getUser(accountId) {
+async function getUser(accountId, req) {
     const user = await db.User.findByPk(accountId);
     if (!user) throw 'User is not present!!!';
+
+    if(user.dataValues.id != req.user.dataValues.id){
+        throw 'Unauthorized'
+    }
+
     return user;
 }
 
