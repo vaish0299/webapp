@@ -9,7 +9,8 @@ const bucketName = env.S3_BUCKET_NAME;
 module.exports = {
     upload,
     getById,
-    deleteDoc
+    deleteDoc,
+    getAllDocs
 };
 
 const s3 = (env.NODE_ENV == "development") ? 
@@ -22,7 +23,7 @@ const s3 = (env.NODE_ENV == "development") ?
     :
     new AWS.S3()
 
-async function upload(params, res) {
+async function upload(params) {
     let myFile = params.files.myFile.name.split(".");
     const fileType = myFile[myFile.length - 1];
 
@@ -55,6 +56,12 @@ async function upload(params, res) {
     }
     const document =  await db.Document.create(meta);
     return omitValues(document.get());
+}
+
+async function getAllDocs(req) {
+    const documents = await db.Document.findAll();
+    if (!documents) throw 'Document not available!!!';
+    return documents;
 }
 
 async function getById(req, doc_id) {

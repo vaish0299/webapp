@@ -7,6 +7,7 @@ const documentService = require('./document-service');
 
 // routes
 router.post('/documents', authorize, documentValidation, upload);
+router.get('/documents', authorize, getAllDocuments);
 router.get('/documents/:doc_id', authorize, getDocumentById);
 router.delete('/documents/:doc_id', authorize, deleteDocument);
 
@@ -22,8 +23,14 @@ function documentValidation(req, res, next) {
 }
 
 function upload(req, res, next) {
-    documentService.upload(req, res)
+    documentService.upload(req)
         .then(data => res.status(201).json(data))
+        .catch(next);
+}
+
+function getAllDocuments(req, res, next) {
+    documentService.getAllDocs(req)
+        .then(data => res.status(200).json(data))
         .catch(next);
 }
 
