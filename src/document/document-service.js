@@ -34,7 +34,7 @@ async function upload(params) {
         Key: key,
         Body: fileContent
     }
-    const path = "https://"+process.env.AWS_BUCKET_NAME+".s3.amazonaws.com/"+key;
+    const path = "https://"+bucketName+".s3.amazonaws.com/"+key;
     console.log(path);
     s3.upload(s3params, function(err, data) {
         if (err) {
