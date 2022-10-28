@@ -8,9 +8,9 @@ module.exports = {
     update,
 };
 
-async function authenticate({ username, password, id}) {
-
-    const user = await db.User.scope('withPassword').findByPk(id);
+async function authenticate({ username, password}) {
+    const user = await db.User.scope('withPassword').findOne({ where: { username: username } })
+    // const user = await db.User.scope('withPassword').findByPk(id);
     //console.log(user)
     let usernameValidation = false;
     if(user){

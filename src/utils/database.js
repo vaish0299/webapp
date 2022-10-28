@@ -26,6 +26,9 @@ async function initialize() {
 
     db.User = require('../user/user-model')(sequelize);
     db.Document = require('../document/document-model')(sequelize);
+
+    db.Document.belongsTo(db.User,{as:'Users',foreignKey:'user_id',targetKey:'id'});
+    db.User.hasMany(db.Document, {foreignKey:'user_id'});
     
     await sequelize.sync();
 }

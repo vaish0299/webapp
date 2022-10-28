@@ -13,14 +13,14 @@ async function authorize(req, res, next) {
     //console.log(credentials)
     const [username, password] = credentials.split(':');
     //console.log(req.url); 
-    let pattern = /\d+/g; //
-    const idArray = req.url.match(pattern)
+    // let pattern = /\d+/g; //
+    // const idArray = req.url.match(pattern)
     //console.log(idArray);
-    if(idArray !== null){
-        id = idArray[0];
-    }  
+    // if(idArray !== null){
+    //     id = idArray[0];
+    // }  
     
-    const  user = await userService.authenticate({ username, password, id});
+    const  user = await userService.authenticate({ username, password});
   
     if (!user) {
         return res.status(401).json({ message: 'Invalid Authentication Credentials' });
