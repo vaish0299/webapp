@@ -29,7 +29,7 @@ function register(req, res, next) {
 }
 
 function getById(req, res, next) {
-    userService.getById(req.params.accountId)
+    userService.getById(req.params.accountId, req)
         .then(user => res.json(user))
         .catch(next);
 }

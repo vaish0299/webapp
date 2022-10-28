@@ -7,8 +7,8 @@ const documentService = require('./document-service');
 
 // routes
 router.post('/documents', authorize, documentValidation, upload);
-// router.get('/account/:accountId', authorize, getById);
-// router.put('/account/:accountId', authorize, updateAccount, update);
+router.get('/documents/:doc_id', authorize, getDocumentById);
+router.delete('/documents/:doc_id', authorize, deleteDocument);
 
 module.exports = router;
 
@@ -27,24 +27,14 @@ function upload(req, res, next) {
         .catch(next);
 }
 
-function getById(req, res, next) {
-    userService.getById(req.params.accountId)
+function getDocumentById(req, res, next) {
+    documentService.getById(req, req.params.doc_id)
         .then(user => res.json(user))
         .catch(next);
 }
 
-function updateAccount(req, res, next) {
-    const schema = Joi.object({
-        first_name: Joi.string().empty(''),
-        last_name: Joi.string().empty(''),
-        username: Joi.string().empty(''),
-        password: Joi.string().min(6).empty('')
-    });
-    validateRequest(req, next, schema);
-}
-
-function update(req, res, next) {
-    userService.update(req.params.accountId, req.body)
+function deleteDocument(req, res, next) {
+    documentService.deleteDoc(req.params.doc_id, req)
         .then(user => res.status(204).json(user))
         .catch(next);
 }
