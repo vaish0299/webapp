@@ -4,7 +4,7 @@ const Joi = require('joi');
 const validateRequest = require('../middleware/validate');
 const authorize = require('../middleware/basic-auth')
 const userService = require('./user-service');
-
+const statsdClient = require('../utils/statsdUtil');
 // routes
 router.post('/account', registerAccount, register);
 router.get('/account/:accountId', authorize, getById);
@@ -23,12 +23,15 @@ function registerAccount(req, res, next) {
 }
 
 function register(req, res, next) {
+    console.log(statsdClient);
+    statsdClient.increment('post_/self');
     userService.create(req.body)
         .then(user => res.status(201).json(user))
         .catch(next);
 }
 
 function getById(req, res, next) {
+    statsdClient.increment('get_/self');
     userService.getById(req.params.accountId, req)
         .then(user => res.json(user))
         .catch(next);
@@ -45,6 +48,7 @@ function updateAccount(req, res, next) {
 }
 
 function update(req, res, next) {
+    statsdClient.increment('put_/self');
     userService.update(req.params.accountId, req.body)
         .then(user => res.status(204).json(user))
         .catch(next);

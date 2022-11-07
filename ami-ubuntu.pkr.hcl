@@ -67,6 +67,11 @@ build {
     source      = "./"
     destination = "/home/ubuntu/webapp"
   }
+  
+  provisioner "file" {
+    source  = "amazon-cloudwatch-agent.json"
+    destination   = "/tmp/amazon-cloudwatch-agent.json"
+  }
 
   provisioner "shell" {
     environment_vars = [

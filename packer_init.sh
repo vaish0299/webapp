@@ -24,6 +24,10 @@ sudo apt install mysql-client-core-8.0
 # sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'";
 # systemctl status mysql.service
 
+echo_info INSTALLING-CLOUDWATCH-AGENT
+wget https://s3.us-east-1.amazonaws.com/amazoncloudwatch-agent-us-east-1/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
+
 sudo npm install -g pm2
 
 mkdir /home/ubuntu/webapp
