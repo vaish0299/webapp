@@ -6,11 +6,11 @@ const authorize = require('../middleware/basic-auth')
 const userService = require('./user-service');
 const statsdClient = require('../utils/statsdUtil');
 // routes
-const StatsD = require('node-statsd');
-const client = new StatsD({
-    host: 'localhost',
-    port: 8125
-});
+// const StatsD = require('node-statsd');
+// const client = new StatsD({
+//     host: 'localhost',
+//     port: 8125
+// });
 router.post('/account', registerAccount, register);
 router.get('/account/:accountId', authorize, getById);
 router.put('/account/:accountId', authorize, updateAccount, update);
@@ -28,7 +28,6 @@ function registerAccount(req, res, next) {
 }
 
 function register(req, res, next) {
-    client.increment('create-user-api');
     console.log(statsdClient);
     statsdClient.increment('post_/self');
     userService.create(req.body)
@@ -37,7 +36,7 @@ function register(req, res, next) {
 }
 
 function getById(req, res, next) {
-    client.increment('get-user-api');
+    statsdClient.increment('get_/self');
     userService.getById(req.params.accountId, req)
         .then(user => res.json(user))
         .catch(next);
@@ -54,7 +53,7 @@ function updateAccount(req, res, next) {
 }
 
 function update(req, res, next) {
-    client.increment('update-user-api');
+    statsdClient.increment('put_/self');
     userService.update(req.params.accountId, req.body)
         .then(user => res.status(204).json(user))
         .catch(next);
