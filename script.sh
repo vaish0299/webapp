@@ -17,5 +17,6 @@ sudo systemctl daemon-reload
 echo "daemon-reload done"
 sudo systemctl enable node-service.service
 sudo systemctl start node-service.service
+echo "systemctl cloudwatch agent"
 sudo systemctl enable amazon-cloudwatch-agent.service
 echo "complete"
