@@ -4,7 +4,7 @@ const Joi = require('joi');
 const validateRequest = require('../middleware/validate');
 const authorize = require('../middleware/basic-auth')
 const userService = require('./user-service');
-const statsdClient = require('../utils/statsdUtil');
+const statsdClient = require('../utils/statsdUtil.js');
 // routes
 // const StatsD = require('node-statsd');
 // const client = new StatsD({

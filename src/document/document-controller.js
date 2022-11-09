@@ -4,7 +4,7 @@ const Joi = require('joi');
 const validateRequest = require('../middleware/validate');
 const authorize = require('../middleware/basic-auth')
 const documentService = require('./document-service');
-const statsdClient= require("../utils/statsdUtil");
+const statsdClient= require("../utils/statsdUtil.js");
 // const StatsD = require('node-statsd');
 // routes
 router.post('/documents', authorize, documentValidation, upload);
