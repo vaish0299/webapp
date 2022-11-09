@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const db = require('../utils/database');
-const logger=require('../log/logger');
+const logger=require('../mylog/logger.js');
 module.exports = {
     authenticate,
     getById,

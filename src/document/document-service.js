@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const db = require('../utils/database');
 const AWS = require('aws-sdk');
 const uuid = require('uuid').v4;
-const logger = require('../log/logger');
+const logger = require('../mylog/logger');
 const env = process.env;
 const bucketName = env.S3_BUCKET_NAME;
 
