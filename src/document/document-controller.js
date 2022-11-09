@@ -27,28 +27,28 @@ function documentValidation(req, res, next) {
 }
 
 function upload(req, res, next) {
-    statsdClient.increment('post_/self/file');
+    statsdClient.increment('post_/documents');
     documentService.upload(req)
         .then(data => res.status(201).json(data))
         .catch(next);
 }
 
 function getAllDocuments(req, res, next) {
-    statsdClient.increment('get_/self/file');
+    statsdClient.increment('get_/documents');
     documentService.getAllDocs(req)
         .then(data => res.status(200).json(data))
         .catch(next);
 }
 
 function getDocumentById(req, res, next) {
-    statsdClient.increment('get_/self/file');
+    statsdClient.increment('get_/documents');
     documentService.getById(req, req.params.doc_id)
         .then(user => res.json(user))
         .catch(next);
 }
 
 function deleteDocument(req, res, next) {
-    statsdClient.increment('delete_/self/file');
+    statsdClient.increment('delete_/documents');
     documentService.deleteDoc(req.params.doc_id, req)
         .then(user => res.status(204).json(user))
         .catch(next);

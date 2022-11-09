@@ -29,14 +29,14 @@ function registerAccount(req, res, next) {
 
 function register(req, res, next) {
     console.log(statsdClient);
-    statsdClient.increment('post_/self');
+    statsdClient.increment('post_/account');
     userService.create(req.body)
         .then(user => res.status(201).json(user))
         .catch(next);
 }
 
 function getById(req, res, next) {
-    statsdClient.increment('get_/self');
+    statsdClient.increment('get_/account');
     userService.getById(req.params.accountId, req)
         .then(user => res.json(user))
         .catch(next);
@@ -53,7 +53,7 @@ function updateAccount(req, res, next) {
 }
 
 function update(req, res, next) {
-    statsdClient.increment('put_/self');
+    statsdClient.increment('put_/account');
     userService.update(req.params.accountId, req.body)
         .then(user => res.status(204).json(user))
         .catch(next);

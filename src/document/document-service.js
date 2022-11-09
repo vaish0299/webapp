@@ -2,9 +2,8 @@ const bcrypt = require('bcryptjs');
 const db = require('../utils/database');
 const AWS = require('aws-sdk');
 const uuid = require('uuid').v4;
-//const logger = require('../log/logger');
+const logger = require('../log/logger');
 const env = process.env;
-//const logger=require("../log/logger")
 const bucketName = env.S3_BUCKET_NAME;
 
 module.exports = {
@@ -13,7 +12,7 @@ module.exports = {
     deleteDoc,
     getAllDocs
 };
-// global.logger=logger;
+global.logger=logger;
 const s3 = (env.NODE_ENV == "development") ? 
     new AWS.S3({
         credentials: {
@@ -36,16 +35,16 @@ async function upload(params) {
         Body: fileContent
     }
     const path = "https://"+bucketName+".s3.amazonaws.com/"+key;
-    // logger.info("uploaded file at"+path);
+    logger.info("uploaded file at"+path);
     console.log(path);
     s3.upload(s3params, function(err, data) {
         if (err) {
-            throw err;
-            // logger.fatal("upload error");
-            // logger.fatal(err)
+            // throw err;
+            logger.fatal("upload error");
+            logger.fatal(err)
         }
         console.log(data);
-        //logger.info('File uploaded Successfully',data);
+        logger.info('File uploaded Successfully',data);
     });
 
     var presignedGETURL = s3.getSignedUrl('getObject', {
@@ -64,12 +63,12 @@ async function upload(params) {
 }
 
 async function getAllDocs(req) {
-    // logger.info("Inside the getall files");
+    logger.info("Inside the getall files");
     const documents = await db.Document.findAll();
-    // logger.info(documents.dataValues.doc_id);
-    // logger.info(documents.dataValues.user_id);
-    // logger.info(documents.dataValues.name);
-    // logger.info(documents.dataValues.s3_bucket_path);
+    logger.info(documents.dataValues.doc_id);
+    logger.info(documents.dataValues.user_id);
+    logger.info(documents.dataValues.name);
+    logger.info(documents.dataValues.s3_bucket_path);
     if (!documents) throw 'Document not available!!!';
     return documents;
 }
@@ -79,15 +78,16 @@ async function getById(req, doc_id) {
 }
 
 async function getDocById(req, doc_id) {
-    //logger.info("Inside the get files by doc_id");
+    logger.info("Inside the get files by doc_id");
+    console.log("HI")
     const document = await db.Document.findOne({ where: { doc_id: doc_id } })
-    //logger.info("doc_id information"+document.dataValues.doc_id);
+    logger.info("doc_id information"+document.dataValues.doc_id);
     if (!document) throw 'Document not available!!!';
 
     if(document.dataValues.user_id != req.user.dataValues.id){
         throw 'This Document is not accessible to you!!!'
     }
-    //logger.info("got the file with specific doc_id")
+    logger.info("got the file with specific doc_id")
     return document;
 }
 
@@ -104,13 +104,13 @@ async function deleteDoc(doc_id, req){
         Bucket: bucketName,
         Key: document.dataValues.doc_id
       };
-    //logger.info("deleting doc with doc_id"+document.dataValues.doc_id);
+    logger.info("deleting doc with doc_id"+document.dataValues.doc_id);
     s3.deleteObject(params, function (err, data) {
         if (err) {
             throw err;
         }
   })
-    //logger.info("deleted doc in the db");
+    logger.info("deleted doc in the db");
 
 }
 
