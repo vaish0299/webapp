@@ -13,7 +13,7 @@ Install:
 * Mysql Workbench
 
 ## Build Instructions
-
+* test
 * Clone repo using the command “git clone “
 * Change to project directory in terminal and run the following commands
 * Run npm install in terminal 
