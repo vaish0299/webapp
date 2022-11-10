@@ -12,7 +12,7 @@ module.exports = {
     deleteDoc,
     getAllDocs
 };
-global.logger=logger;
+// global.logger=logger;
 const s3 = (env.NODE_ENV == "development") ? 
     new AWS.S3({
         credentials: {
