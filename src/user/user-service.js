@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const db = require('../utils/database');
-
+const logger=require('../mylog/logger.js');
 module.exports = {
     authenticate,
     getById,
@@ -9,6 +9,7 @@ module.exports = {
 };
 
 async function authenticate({ username, password}) {
+    logger.info("authenticating the user");
     const user = await db.User.scope('withPassword').findOne({ where: { username: username } })
     let usernameValidation = false;
     if(user){
@@ -33,6 +34,7 @@ async function getById(accountId, req) {
 }
 
 async function create(params) {
+    logger.info("looking if user with that user name already exists");
     if (await db.User.findOne({ where: { username: params.username } })) {
         throw 'Username "' + params.username + '" is already registered, Please pick a different Username!!';
     }
@@ -40,6 +42,7 @@ async function create(params) {
     if (params.password) {
         params.password = await bcrypt.hash(params.password, 10);
     }
+    logger.info("reating a record in the database using the create library (sequalize)");
     //creating a record in the database using the create library (sequalize)
     const user = await db.User.create(params);
     return omitPassword(user.get());
@@ -47,7 +50,9 @@ async function create(params) {
 
 async function update(accountId, params) {
     //we get this user object from the db
+    logger.info("getting this user object from the db");
     const user = await getUser(accountId);
+    logger.info("getting the user from db");
     //if changing the password this is to encrypt the new password
     if(user){
         if(params.username !== user.dataValues.username) {
@@ -65,18 +70,20 @@ async function update(accountId, params) {
     Object.assign(user, params);
     //saving the user object to the db
     await user.save();
+    logger.info("saving the user to db");
     //To omit password in the response 
     return omitPassword(user.get());
 }
 
 async function getUser(accountId, req) {
     const user = await db.User.findByPk(accountId);
+    logger.info("finding the user using id in the db");
     if (!user) throw 'User is not present!!!';
 
     if(user.dataValues.id != req.user.dataValues.id){
         throw 'Unauthorized'
     }
-
+    logger.info("user is present");
     return user;
 }
 
