@@ -28,6 +28,7 @@ function documentValidation(req, res, next) {
 
 function upload(req, res, next) {
     statsdClient.increment('post_/documents');
+    statsdClient.timer('upload.time');
     documentService.upload(req)
         .then(data => res.status(201).json(data))
         .catch(next);
