@@ -1,7 +1,7 @@
 const app = require('./src/app')
 const winston = require('winston');
 const  expressWinston = require('express-winston');
-const winstonCloudWatch = require('winston-aws-cloudwatch');
+//const winstonCloudWatch = require('winston-aws-cloudwatch');
 const port = process.env.NODE_ENV === 'ci' ? (process.env.PORT || 80) : 8000;
 const server = app.listen(port, () => console.log('Srver Started on ' + port));
 app.use(expressWinston.logger({

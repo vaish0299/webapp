@@ -1,5 +1,5 @@
 const { createLogger, format, transports } = require("winston");
-const winstonCloudWatch = require("winston-aws-cloudwatch");
+//const winstonCloudWatch = require("winston-aws-cloudwatch");
 // const moment = require('moment')
 
 // set default log level.
@@ -32,19 +32,19 @@ var logger = createLogger({
   ],
 });
 //if (process.env.NODE_ENV === "production") {
-  logger.add(
-    new winstonCloudWatch({
-      logGroupName: "csye6225",
-      logStreamName: "webapp",
-      createLogGroup: true,
-      createLogStream: true,
-      awsConfig: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-        region: "us-east-1",
-      },
-    })
-  );
+  // logger.add(
+  //   new winstonCloudWatch({
+  //     logGroupName: "csye6225",
+  //     logStreamName: "webapp",
+  //     createLogGroup: true,
+  //     createLogStream: true,
+  //     awsConfig: {
+  //       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  //       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  //       region: "us-east-1",
+  //     },
+  //   })
+  // );
 //}
 // Extend logger object to properly log 'Error' types
 var origLog = logger.log;
