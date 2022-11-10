@@ -1,6 +1,6 @@
 const { createLogger, format, transports } = require("winston");
 //const winstonCloudWatch = require("winston-aws-cloudwatch");
-const moment = require('moment')
+// const moment = require('moment')
 
 // set default log level.
 const logLevel = "info";
