@@ -23,7 +23,7 @@ sudo apt install mysql-client-core-8.0
 # sudo systemctl start mysql.service
 # sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'";
 # systemctl status mysql.service
-
+sudo apt install wget
 sudo npm install -g pm2
 
 mkdir /home/ubuntu/webapp
