@@ -23,6 +23,7 @@ function registerAccount(req, res, next) {
 }
 
 function register(req, res, next) {
+    console.log(statsdClient);
     statsdClient.increment('post_/account');
     userService.create(req.body)
         .then(user => res.status(201).json(user))
