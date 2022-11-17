@@ -3,10 +3,6 @@ let AWS = require('aws-sdk');
 
 let docClient = new AWS.DynamoDB.DocumentClient({
   region:'us-east-1',
-//   accessKeyId: process.env.AWS_ACCESS_KEY,
-//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  accessKeyId: "AKIAUPEBVFU5AH7KYS6M",
-  secretAccessKey: "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",
 });
 const fs = require('fs');
 const path = require("path");

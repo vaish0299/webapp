@@ -12,13 +12,15 @@ const fs = require('fs');
 const path = require("path");
 let rawdata = fs.readFileSync(path.resolve(__dirname, "../../mysql.config"));
 let config = JSON.parse(rawdata);
+const env = process.env;
+const domainName = env.DOMAIN_NAME;
 // routes
 router.post('/account', registerAccount, register);
 router.get('/account/:accountId', authorize, getById);
 router.put('/account/:accountId', authorize, updateAccount, update);
 
 router.post('/',registerAccount,register);
-router.get('/verify',verifyUser);
+router.get('/user/verify',verifyUser);
 
 module.exports = router;
 //To validate our req.body 
@@ -74,7 +76,7 @@ const  generateNSendVerificationLink =async function (user){
         await DynamoDBUtil.addEntry(user.username,token);
         
         const email=user.username,userName=user.first_name;
-        let verifyLink = `https://${config.domain}/v1/user/verify?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`;
+        let verifyLink = `http://${domainName}/v1/user/verify?email=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`;
         try{
           await SNSUtil.sendEmail({toEmail:email,userName:userName,verifyLink:verifyLink});
           await DynamoDBUtil.addEntry(user.username,"EMAIL_SENT");

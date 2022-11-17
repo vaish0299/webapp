@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
-const validateRequest = require('../middleware/validate');
 const authorize = require('../middleware/basic-auth')
 const documentService = require('./document-service');
 const statsdClient= require("../utils/statsdUtil.js");

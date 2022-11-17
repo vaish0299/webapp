@@ -15,8 +15,6 @@ let fromEmail=config.fromEmail
 // fromEmail='no-reply@prod.dheerajreddy.me';
 let sns = new AWS.SNS({
   region:'us-east-1',
-  accessKeyId: "AKIAUPEBVFU5AH7KYS6M",
-  secretAccessKey: "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",
 });
 
 // const topic = "arn:aws:sns:us-east-1:101417083507:emailTopicTesting";//config.topicARN;

@@ -13,9 +13,14 @@ async function authenticate({ username, password}) {
     logger.info("authenticating the user");
     const user = await db.User.scope('withPassword').findOne({ where: { username: username } })
     let usernameValidation = false;
+    console.log(user.dataValues.verified)
     if(user){
         if(username === user.dataValues.username){
             usernameValidation = true;
+        } 
+        if(user.dataValues.verified !== "true"){
+            console.log("I am in")
+            throw 'User Not Verified';
         }
         const compare = await comparePassword(password, user.dataValues.password);
         if (user && compare && usernameValidation) {

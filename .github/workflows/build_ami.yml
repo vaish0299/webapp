@@ -7,7 +7,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 on:
   push:
-    branches: [ main ]
+    branches: [ ass-8 ]
 
 jobs:
   ami_creation_job:
