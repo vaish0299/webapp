@@ -12,13 +12,14 @@ function errorHandler(err, res, res, next) {
             const docNotAvailable = err.includes('Document not available');
             const docDeleteNotAccessible = err.includes('You cannot delete this document');
             const unAuthorized = "Unauthorized";
+            const notVerified = err.includes("User Not Verified");
 
             let statusCode;
             if(is404 || userNotFound || docNotAvailable) {
                 statusCode = 404;
             } else if (isUserAlreadyPresent || bad) {
                 statusCode = 400;
-            }else if(userForbidden || docNotAccessible || docDeleteNotAccessible || unAuthorized){
+            }else if(userForbidden || docNotAccessible || docDeleteNotAccessible || unAuthorized || notVerified){
                 statusCode = 403;
             }
             return res.status(statusCode).json({ message: err });

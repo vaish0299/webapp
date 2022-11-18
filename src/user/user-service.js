@@ -6,15 +6,21 @@ module.exports = {
     getById,
     create,
     update,
+    markUserVerified
 };
 
 async function authenticate({ username, password}) {
     logger.info("authenticating the user");
     const user = await db.User.scope('withPassword').findOne({ where: { username: username } })
     let usernameValidation = false;
+    console.log(user.dataValues.verified)
     if(user){
         if(username === user.dataValues.username){
             usernameValidation = true;
+        } 
+        if(user.dataValues.verified !== "true"){
+            console.log("I am in")
+            throw 'User Not Verified';
         }
         const compare = await comparePassword(password, user.dataValues.password);
         if (user && compare && usernameValidation) {
@@ -38,13 +44,16 @@ async function create(params) {
     if (await db.User.findOne({ where: { username: params.username } })) {
         throw 'Username "' + params.username + '" is already registered, Please pick a different Username!!';
     }
-
+    console.log("HI")
     if (params.password) {
         params.password = await bcrypt.hash(params.password, 10);
     }
+    params.verified = "false";
+
     logger.info("reating a record in the database using the create library (sequalize)");
     //creating a record in the database using the create library (sequalize)
     const user = await db.User.create(params);
+    // console.log(user);
     return omitPassword(user.get());
 }
 
@@ -86,6 +95,19 @@ async function getUser(accountId, req) {
     logger.info("user is present");
     return user;
 }
+
+async function markUserVerified({username}){
+    const data = await db.User.findOne({ where: { username: username } });
+    console.log("data inside mark as user verified");
+    console.log(data);
+    // let date_ob = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+    const temp = await db.User.update({
+      verified:"true",
+    //   updated_time:date_ob
+      },{where:{username:username}});
+      console.log("data after updating");
+    console.log(temp);
+  }
 
 function omitPassword(user) {
     const { password, ...userWithoutPassword } = user;
