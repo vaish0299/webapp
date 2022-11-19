@@ -2,7 +2,7 @@ let AWS = require('aws-sdk');
 // const {S3_BUCKET_REGION} = require('../util/constants');
 
 let docClient = new AWS.DynamoDB.DocumentClient({
-  region:'us-east-1',
+  region:'us-east-1'
 });
 const fs = require('fs');
 const path = require("path");
