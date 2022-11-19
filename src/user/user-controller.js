@@ -69,7 +69,7 @@ function update(req, res, next) {
 
 const  generateNSendVerificationLink =async function (user){
     const token =   (uuid.v4());
-    
+    console.log("Send Link")
     let data =  await DynamoDBUtil.getEntry(user.username,"EMAIL_SENT");
     //(data && Object.keys(data).length !== 0)
     if( !data || Object.keys(data).length === 0){
