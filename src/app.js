@@ -21,6 +21,10 @@ app.get("/healthz", (req, res) => {
     res.status(200).send({"statusCode":200, "message":"healthCheck successful!!!"});
 });
 
+app.get("/checkpoint", (req, res) => {
+    res.status(200).send({"statusCode":200, "message":"healthCheck successful!!!"});
+});
+
 app.use('/v1', require('./user/user-controller'));
 app.use('/v1', require('./document/document-controller'));
 

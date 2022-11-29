@@ -11,13 +11,13 @@ let domain = config.domain;
 let fromEmail=config.fromEmail
 
 
-// domain='prod.dheerajreddy.me';
-// fromEmail='no-reply@prod.dheerajreddy.me';
+
+
 let sns = new AWS.SNS({
   region:'us-east-1',
 });
 
-// const topic = "arn:aws:sns:us-east-1:101417083507:emailTopicTesting";//config.topicARN;
+
 const topic =config.topicARN;
 const  postMessage = async function(message){
   const params={
