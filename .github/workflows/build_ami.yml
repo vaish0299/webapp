@@ -28,5 +28,5 @@ jobs:
     - name: Building Packer Template
       run: packer build ami-ubuntu.pkr.hcl 2>&1 | sudo tee output.txt; tail -2 output.txt | head -2 | awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' >> ami.txt
     
-    - name: modifying template version
-      run: aws ec2 modify-launch-template --launch-template-id lt-0839a8c98b1329148 --default-version 1
+    - name: create launch template
+      run: cat ami.txt | while read file; do aws ec2 --profile demo create-launch-template-version --launch-template-id lt-0d289aa5c20663038 --version-description version3 --source-version 1 --launch-template-data "ImageId=$file"; done
