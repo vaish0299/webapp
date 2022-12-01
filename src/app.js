@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/health", (req, res) => {
+app.get("/healthz", (req, res) => {
     res.status(200).send({"statusCode":200, "message":"healthCheck successful!!!"});
 });
 
