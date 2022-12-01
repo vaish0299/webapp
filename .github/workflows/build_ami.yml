@@ -29,4 +29,4 @@ jobs:
       run: packer build ami-ubuntu.pkr.hcl 2>&1 | sudo tee output.txt; tail -2 output.txt | head -2 | awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' >> ami.txt
     
     - name: modifying template version
-      run: aws ec2 --profile demo modify-launch-template --launch-template-id lt-0839a8c98b1329148 --default-version 1
+      run: aws ec2 modify-launch-template --launch-template-id lt-0839a8c98b1329148 --default-version 1
