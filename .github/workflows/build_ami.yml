@@ -24,5 +24,6 @@ jobs:
 
     - name: Installing packer provisioners
       run: packer init ami-ubuntu.pkr.hcl
-
-    
+      
+    - name: Building Packer Template
+      run: packer build ami-ubuntu.pkr.hcl
