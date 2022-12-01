@@ -29,10 +29,11 @@ jobs:
       run: packer build ami-ubuntu.pkr.hcl 2>&1 | sudo tee output.txt; tail -2 output.txt | head -2 | awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' >> ami.txt
     
     - name: create launch template
-      run: cat ami.txt | while read file; do aws ec2 create-launch-template-version --launch-template-id lt-0839a8c98b1329148 --version-description version1 --source-version 1 --launch-template-data "ImageId=$file"; done
+      run: cat ami.txt | while read file; do aws ec2 create-launch-template-version --launch-template-id lt-06befba0a8c370b84 --version-description version1 --source-version 1 --launch-template-data "ImageId=$file"; done
 
     - name: update the launch template  
       run: aws autoscaling update-auto-scaling-group --auto-scaling-group-name stack-asg --launch-template LaunchTemplateId=lt-06befba0a8c370b84,Version='$Latest'
 
     - name: Instance refresh
       run: aws autoscaling start-instance-refresh --auto-scaling-group-name stack-asg
+      
