@@ -33,6 +33,7 @@ Install:
 * 2. Bcrypt 
 * 3. Express
 * 4. Joi
+* test
 * 5. Mysql
 * 6. Sequelize
 * 7. sqlite3
