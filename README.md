@@ -1,4 +1,4 @@
-##Project
+## Project
 
 * Developed a robust web application utilizing NodeJS and ExpressJS for the backend, and integrating RDS for the database, S3 for file storage, and SES for email notifications
 * Orchestrated a fault-tolerant application by deploying instances across multiple availability zones, implementing auto-scaling policies and load-balancing techniques
